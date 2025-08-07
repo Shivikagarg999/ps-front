@@ -1,33 +1,35 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
+import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function HomeScreen() {
+export default function SecondScreen() {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
-      {/* Illustration */}
+      {/* Logo at the top */}
       <Image
-        source={{ uri: 'https://cdn-icons-png.flaticon.com/512/5141/5141534.png' }}
-        style={styles.image}
+        source={{ uri: 'https://cdn-icons-png.flaticon.com/512/5141/5141534.png' }} // ✅ Replace with your logo URL
+        style={styles.logo}
+        resizeMode="contain"
       />
 
-      {/* Heading */}
-      <Text style={styles.heading}>Beauty Services at Your Doorstep</Text>
+      {/* Content in center */}
+      <View style={styles.content}>
+        <Image
+          source={{ uri: 'https://cdn-icons-png.flaticon.com/512/5141/5141534.png' }} // ✅ Replace with better soft pink illustration if you want
+          style={styles.image}
+        />
 
-      {/* Subtext */}
-      <Text style={styles.subtext}>
-        Book professional beauty services from verified beauticians in the comfort of your home
-      </Text>
+        <Text style={styles.heading}>Beauty Services at Your Doorstep</Text>
+        <Text style={styles.subtext}>
+          Book professional beauty services from verified beauticians in the comfort of your home
+        </Text>
 
-      {/* Dots */}
-      <View style={styles.dotsContainer}>
-        <View style={[styles.dot, { backgroundColor: '#e0e0e0' }]} />
-        <View style={[styles.dot, { backgroundColor: '#e91e63' }]} />
-        <View style={[styles.dot, { backgroundColor: '#e0e0e0' }]} />
+        <TouchableOpacity style={styles.button} onPress={() => router.push('/screens/LoginScreen')}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
       </View>
-
-      {/* Next Button */}
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Next</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -35,52 +37,57 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    backgroundColor: '#fff',
+    paddingHorizontal: 24,
+    paddingTop: 60,
+    alignItems: 'center',
+  },
+  logo: {
+    width: 140,
+    height: 60,
+    marginBottom: 30,
+  },
+  content: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    width: '100%',
   },
   image: {
     width: 240,
     height: 240,
-    borderRadius: 20,
-    marginBottom: 32,
+    marginBottom: 30,
   },
   heading: {
     fontSize: 22,
     fontWeight: '700',
+    color: '#ff6b81',
     textAlign: 'center',
     marginBottom: 12,
-    color: '#333',
   },
   subtext: {
-    fontSize: 14,
-    textAlign: 'center',
+    fontSize: 15,
     color: '#666',
+    textAlign: 'center',
     marginBottom: 30,
+    lineHeight: 22,
     paddingHorizontal: 10,
   },
-  dotsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 30,
-  },
-  dot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    marginHorizontal: 6,
-  },
   button: {
-    backgroundColor: '#e91e63',
+    backgroundColor: '#ff6b81',
     paddingVertical: 14,
-    paddingHorizontal: 80,
+    paddingHorizontal: 36,
     borderRadius: 10,
-    elevation: 2,
+    shadowColor: '#ff6b81',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 5,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 16,
     fontWeight: '600',
+    fontSize: 16,
+    letterSpacing: 0.5,
   },
 });
